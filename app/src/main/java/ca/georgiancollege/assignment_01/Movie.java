@@ -3,12 +3,12 @@ package ca.georgiancollege.assignment_01;
 public class Movie {
     private String title;
     private String director;
-    private int year;
-    private double rating;
-    private double imdbID;
+    private String year;
+    private String rating;
+    private String imdbID;
 
     //contructor method
-    public Movie(String title, String director, int year, double rating, double imdbID) {
+    public Movie(String title, String director, String year, String rating, String imdbID) {
         this.title = title;
         this.director = director;
         this.year = year;
@@ -25,15 +25,15 @@ public class Movie {
         return director;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public double getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public double getImdbID() {
+    public String getImdbID() {
         return imdbID;
     }
 
