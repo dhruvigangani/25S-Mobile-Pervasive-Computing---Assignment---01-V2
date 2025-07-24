@@ -1,5 +1,6 @@
 package ca.georgiancollege.assignment_01;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         //setup recycler view
         movieRecycler = findViewById(R.id.recyclerView);
@@ -58,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
         });
 
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -68,7 +69,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
 
     @Override
     public void onItemClick(Movie movie) {
-
+        Intent intent = new Intent(this, MovieDetailsActivity.class);
+        intent.putExtra("movie_id", movie.getImdbID());
+        startActivity(intent);
     }
 
     private class FetchMovieTask extends AsyncTask<String, Void, List<Movie>> {
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
             List<Movie> result = new ArrayList<>();
             try {
                 String query = params[0].replace(" ", "+");
-                String urlString = "https://www.omdbapi.com/?s=" + API_KEY + "&apikey=" + query;
+                String urlString = "https://www.omdbapi.com/?apikey=" + API_KEY + "&s=" + query;
                 URL url = new URL(urlString);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
                         String year = item.getString("Year");
                         String imdbID = item.getString("imdbID");
 
-                        String detailsURL = "https://www.omdbapi.com/?apikey" + API_KEY + "&i=" + imdbID + "&plot=short";
+                        String detailsURL = "https://www.omdbapi.com/?apikey=" + API_KEY + "&i=" + imdbID + "&plot=short";
                         URL detailsUrl = new URL(detailsURL);
 
                         HttpURLConnection detailsConn = (HttpURLConnection) detailsUrl.openConnection();
