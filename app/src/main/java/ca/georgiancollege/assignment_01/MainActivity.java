@@ -1,6 +1,8 @@
 package ca.georgiancollege.assignment_01;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
     private List<Movie> movies = new ArrayList<>();
     private final String API_KEY = "5bfa8ddf";
 
+    private EditText searchInput;
+    private Button searchBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
         movieRecycler = findViewById(R.id.recyclerView);
         adapter = new MovieAdapter(movies, this);
         movieRecycler.setAdapter(adapter);
+
+        searchInput = findViewById(R.id.searchEditText);
+        searchBtn = findViewById(R.id.searchButton);
+
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
