@@ -127,6 +127,16 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
             return result;
         }
 
+        @Override
+        protected void onPostExecute(List<Movie> result) {
+            movies.clear();
+            if(result!=null && !result.isEmpty()) {
+                movies.addAll(result);
+            }else {
+                Toast.makeText(MainActivity.this, "No Results Found", Toast.LENGTH_SHORT).show();
+            }
+            adapter.notifyDataSetChanged();
+        }
 
     }
 
