@@ -7,12 +7,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements MovieAdapter.OnItemClickListener {
+
+    private RecyclerView movieRecycler;
+    private MovieAdapter adapter;
+    private List<Movie> movies = new ArrayList<>();
+    private final String API_KEY = "5bfa8ddf";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //setup recycler view
+        movieRecycler = findViewById(R.id.recyclerView);
+        adapter = new MovieAdapter(movies, this);
+        movieRecycler.setAdapter(adapter);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -21,4 +37,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+
+    @Override
+    public void onItemClick(Movie movie) {
+    }
+
+
 }
