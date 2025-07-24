@@ -1,8 +1,10 @@
 package ca.georgiancollege.assignment_01;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +39,16 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
         searchBtn = findViewById(R.id.searchButton);
 
 
+        //search button click listener
+        searchBtn.setOnClickListener(view -> {
+            String query = searchInput.getText().toString().trim();
+            if(!TextUtils.isEmpty(query)) {
+                new FetchMovieTask().execute(query);
+            }else {
+                Toast.makeText(this, "Enter Movie Title", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -45,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.OnIt
             return insets;
         });
     }
-
 
     @Override
     public void onItemClick(Movie movie) {
