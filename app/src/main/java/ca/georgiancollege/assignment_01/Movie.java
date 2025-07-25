@@ -2,21 +2,19 @@ package ca.georgiancollege.assignment_01;
 
 public class Movie {
     private String title;
-    private String director;
     private String year;
-    private String rating;
     private String imdbID;
+    private String director;
+    private String rating;
 
-    //contructor method
-    public Movie(String title, String director, String year, String rating, String imdbID) {
+    public Movie(String title, String year, String imdbID, String director, String rating) {
         this.title = title;
-        this.director = director;
         this.year = year;
-        this.rating = rating;
         this.imdbID = imdbID;
+        this.director = director;
+        this.rating = rating;
     }
 
-    //getter methods
     public String getTitle() {
         return title;
     }
@@ -25,16 +23,16 @@ public class Movie {
         return director;
     }
 
-    public String getYear() {
-        return year;
-    }
-
     public String getRating() {
         return rating;
     }
 
+    public String getYear() {
+        return year;
+    }
     public String getImdbID() {
         return imdbID;
     }
 
 }
+

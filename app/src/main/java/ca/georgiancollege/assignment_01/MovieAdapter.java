@@ -6,11 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+
     private List<Movie> movieList;
     private OnItemClickListener listener;
 
@@ -23,16 +23,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.listener = listener;
     }
 
-    @NonNull
     @Override
-    public MovieAdapter.MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_movie, parent, false);
         return new MovieViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieAdapter.MovieViewHolder holder, int position) {
+    public void onBindViewHolder(MovieViewHolder holder, int position) {
         Movie movie = movieList.get(position);
 
         holder.titleText.setText(movie.getTitle());
@@ -40,12 +39,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.ratingText.setText("Rating: " + movie.getRating());
         holder.yearText.setText("Year: " + movie.getYear());
 
-        holder.itemView.setOnClickListener(
-                v -> {
-                    if (listener != null) {
-                        listener.onItemClick(movie);
-                    }
-                });
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(movie);
+            }
+        });
     }
 
     @Override
@@ -54,12 +52,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     static class MovieViewHolder extends RecyclerView.ViewHolder {
-        TextView titleText;
-        TextView directorText;
-        TextView ratingText;
-        TextView yearText;
+        TextView titleText, directorText, ratingText, yearText;
 
-        public MovieViewHolder(@NonNull View itemView) {
+        public MovieViewHolder(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.titleText);
             directorText = itemView.findViewById(R.id.directorText);
@@ -67,5 +62,5 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             yearText = itemView.findViewById(R.id.yearText);
         }
     }
-
 }
+
